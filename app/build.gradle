@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -21,6 +24,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -32,5 +43,100 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Material Design
+    def mat_design = "1.3.0-alpha02"
+    implementation "com.google.android.material:material:$mat_design"
+
+    // Architectural Components
+    def lifecycle = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
+
+    // Room
+    def room = "2.2.5"
+    implementation "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room"
+
+    // Coroutines
+    def coroutine_core = "1.3.7"
+    def coroutine_android = "1.3.5"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_core"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_android"
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
+
+    // Navigation Components
+    def navigation = "2.3.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+
+    // Activity KTX for viewModels()
+    def activity_ktx = "1.1.0"
+    implementation "androidx.activity:activity-ktx:$activity_ktx"
+
+    //Dagger - Hilt
+    def hilt = "2.28-alpha"
+    implementation "com.google.dagger:hilt-android:$hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt"
+
+    def hilt_lf = "1.0.0-alpha02"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lf"
+    kapt "androidx.hilt:hilt-compiler:$hilt_lf"
+
+    // Timber
+    def timber = "4.7.1"
+    implementation "com.jakewharton.timber:timber:$timber"
+
+    // Local Unit Tests
+    def test_core = "1.2.0"
+    implementation "androidx.test:core:$test_core"
+
+    def junit = "4.13"
+    testImplementation "junit:junit:$junit"
+
+    def hamcrest = "1.3"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest"
+
+    def testing = "2.1.0"
+    testImplementation "androidx.arch.core:core-testing:$testing"
+
+    def robolectric = "4.3.1"
+    testImplementation "org.robolectric:robolectric:$robolectric"
+
+    def coroutine_test = "1.2.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test"
+
+    def google_truth = "1.0.1"
+    testImplementation "com.google.truth:truth:$google_truth"
+
+    def mockito = "2.21.0"
+    testImplementation "org.mockito:mockito-core:$mockito"
+
+    // Instrumented Unit Tests
+    def dexmaker_mockito = "2.12.1"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_mockito"
+
+    androidTestImplementation "junit:junit:$junit"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test"
+    androidTestImplementation "androidx.arch.core:core-testing:$testing"
+    androidTestImplementation "com.google.truth:truth:$google_truth"
+    androidTestImplementation "org.mockito:mockito-core:$mockito"
+
+    def junit_ext = "1.1.1"
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext"
+
+    def espresso = "3.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 
 }
